@@ -3,7 +3,7 @@ import React from 'react'
 import './App.css'
 import { Route } from 'react-router-dom'
 import Home from './containers/Home'
-import Search from './containers/Search';
+import SearchPage from './containers/SearchPage';
 
 class BooksApp extends React.Component {
   state = {
@@ -23,7 +23,7 @@ class BooksApp extends React.Component {
           <Home />
         )} />
         <Route path='/search' render={() => (
-          <Search />)} />
+          <SearchPage />)} />
       </div>
     )
   }
