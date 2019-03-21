@@ -4,25 +4,8 @@ import AddBook from '../../Components/AddBook'
 
 
 class Home extends Component {
-    /*
-    books: [{name:'',author:'',shelfId:0,Image:'',rank:0}, 
-    {name:'',author:'',shelfId:0,Image:'',rank:0}]
-    */
-    state = {
-        books: [{ name: 'kkff', author: 'ssss', shelfId: 2, Image: '', rank: 0 },
-        { name: 'kkff', author: 'ssss', shelfId: 1, Image: '', rank: 0 },
-        { name: 'kkff', author: 'ssss', shelfId: 3, Image: '', rank: 0 },
-        { name: 'kkff', author: 'ssss', shelfId: 3, Image: '', rank: 0 },
-        { name: 'kkff', author: 'ssss', shelfId: 3, Image: '', rank: 0 },
-        { name: 'kkff', author: 'ssss', shelfId: 2, Image: '', rank: 0 },]
-    }
-    shelfData = [{ name: 'Currently Reading', id: 1 }, { name: 'Want to Read', id: 2 }, { name: 'Read', id: 3 }]
 
-    /*updateShelf=()=>{
-        const arr = [...this.state.books]
-        arr.push(userData)
-        this.setState({chat : arr})
-    }*/
+    shelfData = [{ name: 'Currently Reading', id: 1 }, { name: 'Want to Read', id: 2 }, { name: 'Read', id: 3 }]
     render() {
 
         return (
@@ -37,7 +20,7 @@ class Home extends Component {
                                 return <Shelf
                                     updateShelfId={this.shelfData}
                                     shelfData={shelf}
-                                    books={this.state.books
+                                    books={this.props.books
                                         .filter((book) => {
                                             return book['shelfId'] === shelf.id
                                         })} />
