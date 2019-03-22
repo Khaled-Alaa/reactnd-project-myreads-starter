@@ -7,21 +7,24 @@ class Search extends Component {
 
   state = {
     query: '',
-    books :[]
+    books: []
   }
 
   updateQuery = (query) => {
-    this.setState({query: query})
+    this.setState({ query: query })
 
     BooksAPI.search(query).then((response) => {
-      debugger;
       var booksArr = Array.isArray(response) ? response : []
-      this.setState({books : booksArr})
+      this.setState({ books: booksArr })
     })
   }
 
   clearQuery = () => {
     this.updateQuery('')
+  }
+
+  getBooKAndShelf(book, shelfName) {
+    this.props.getBook(book, shelfName)
   }
 
   render() {
@@ -42,8 +45,10 @@ class Search extends Component {
           <ol className="books-grid">
             {
               //handle empty states
-              this.state.books.map((book)=>{
-                  return <li><Book bookData={book}/></li>
+              this.state.books.map((book) => {
+                return <li><Book bookData={book}
+                  getBooKAndShelf={this.getBooKAndShelf.bind(this)}
+                /></li>
               })
             }
           </ol>

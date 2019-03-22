@@ -9,7 +9,7 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token
+  'Authorization': "123456"
 }
 
 export const get = (bookId) =>
