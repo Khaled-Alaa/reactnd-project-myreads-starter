@@ -13,7 +13,7 @@ class BooksApp extends React.Component {
   state = {
     books: []
   }
-  
+
   shelfData = [{ displayName: 'Currently Reading', name: 'currentlyReading' }, { displayName: 'Want to Read', name: 'wantToRead' }, { displayName: 'Read', name: 'read' }]
 
   componentDidMount() {
@@ -51,6 +51,7 @@ class BooksApp extends React.Component {
     } else {
       debugger;
       var arr = [...this.state.books]
+      book.shelf = shelfName
       arr.push(book)
       this.setState({ books: arr })
     }
