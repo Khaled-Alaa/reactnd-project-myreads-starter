@@ -7,20 +7,15 @@ class BookAction extends Component {
             value: ''
         }
     }
-
     componentDidMount() {
         this.setState ({
             value: this.props.bookData.shelf || 'none'
         })
     }
-
-
-
     updateShelf = (event) => {
         this.props.getShelf(event.target.value)
         this.setState({ value: event.target.value})
     }
-
     render() {
         return (
             <div className="book-shelf-changer">
