@@ -49,7 +49,6 @@ class BooksApp extends React.Component {
     if (existBook) {
       this.changeshelf(book.id, shelfName)
     } else {
-      debugger;
       var arr = [...this.state.books]
       book.shelf = shelfName
       arr.push(book)

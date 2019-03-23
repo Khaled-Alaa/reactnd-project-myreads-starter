@@ -14,7 +14,7 @@ class Book extends Component {
                         <div className="book-cover"
                             style={{
                                 width: 128, height: 193,
-                                backgroundImage: `url(${this.props.bookData.imageLinks.smallThumbnail})`
+                                backgroundImage: `url(${this.props.bookData.imageLinks && (this.props.bookData.imageLinks.smallThumbnail || this.props.bookData.imageLinks.thumbnail)})`
                             }}></div>
                         <BookAction bookData={this.props.bookData}
                             getShelf={this.getShelf.bind(this)}

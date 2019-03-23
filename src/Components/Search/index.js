@@ -19,6 +19,18 @@ class Search extends Component {
 
     BooksAPI.search(query).then((response) => {
       var booksArr = Array.isArray(response) ? response : []
+
+      for (let i = 0; i < booksArr.length; i++) {
+        const bookItem = booksArr[i];
+        const existBook = this.props.booksData.find((element) => {
+          return element.id === bookItem.id
+        })
+        if (existBook) {
+          bookItem.shelf = existBook.shelf
+        }
+      }
+
+
       this.setState({
         books: booksArr,
         isLoading: false
@@ -34,8 +46,29 @@ class Search extends Component {
     this.props.getBook(book, shelfName)
   }
 
-  render() {
+  _renderItem() {
+    const { isLoading, books,query } = this.state;
 
+    if (isLoading == false && books.length === 0 && query.length ===0) {
+      return <li>{'Please Write Something'}</li>;
+    }
+
+    if (isLoading) {
+      return <li>{'Loading...'}</li>
+    }
+
+    if (isLoading == false && books.length === 0) {
+      return <li>{'No Books Found'}</li>;
+    }
+
+    return books.map((book) => {
+      return <li><Book bookData={book}
+        getBooKAndShelf={this.getBooKAndShelf.bind(this)}
+      /></li>
+    })
+  }
+
+  render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -50,17 +83,11 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {
-              this.state.books.length === 0 ? <li>{'No Books Found'}</li> :
-                this.state.books.map((book) => {
-                  return <li><Book bookData={book}
-                    getBooKAndShelf={this.getBooKAndShelf.bind(this)}
-                  /></li>
-                })
-            }
+            {this._renderItem()}
           </ol>
         </div>
       </div>
+
     )
   }
 }

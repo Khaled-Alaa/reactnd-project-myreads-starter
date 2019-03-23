@@ -15,8 +15,10 @@ class BookAction extends Component {
     }
 
 
+
     updateShelf = (event) => {
-        this.setState({ value: this.props.getShelf(event.target.value) })
+        this.props.getShelf(event.target.value)
+        this.setState({ value: event.target.value})
     }
 
     render() {
