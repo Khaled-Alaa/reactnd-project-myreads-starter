@@ -7,15 +7,22 @@ class Search extends Component {
 
   state = {
     query: '',
-    books: []
+    books: [],
+    isLoading: false
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query })
+    this.setState({
+      query: query.trim(),
+      isLoading: true
+    })
 
     BooksAPI.search(query).then((response) => {
       var booksArr = Array.isArray(response) ? response : []
-      this.setState({ books: booksArr })
+      this.setState({
+        books: booksArr,
+        isLoading: false
+      })
     })
   }
 
@@ -28,6 +35,7 @@ class Search extends Component {
   }
 
   render() {
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -38,18 +46,17 @@ class Search extends Component {
               value={this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
             {
-              //handle empty states
-              this.state.books.map((book) => {
-                return <li><Book bookData={book}
-                  getBooKAndShelf={this.getBooKAndShelf.bind(this)}
-                /></li>
-              })
+              this.state.books.length === 0 ? <li>{'No Books Found'}</li> :
+                this.state.books.map((book) => {
+                  return <li><Book bookData={book}
+                    getBooKAndShelf={this.getBooKAndShelf.bind(this)}
+                  /></li>
+                })
             }
           </ol>
         </div>
@@ -57,5 +64,6 @@ class Search extends Component {
     )
   }
 }
+
 
 export default Search
