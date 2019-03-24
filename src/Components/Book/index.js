@@ -1,31 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import BookAction from '../BookAction'
 
-class Book extends Component {
-    getShelf(shelfName) {
-        this.props.getBooKAndShelf(this.props.bookData, shelfName)
+function Book(props) {
+    const getShelf = function (shelfName) {
+        props.getBooKAndShelf(props.bookData, shelfName)
     }
-
-    render() {
-        return (
-            <li>
-                <div className="book">
-                    <div className="book-top">
-                        <div className="book-cover"
-                            style={{
-                                width: 128, height: 193,
-                                backgroundImage: `url(${this.props.bookData.imageLinks && (this.props.bookData.imageLinks.smallThumbnail || this.props.bookData.imageLinks.thumbnail)})`
-                            }}></div>
-                        <BookAction bookData={this.props.bookData}
-                            getShelf={this.getShelf.bind(this)}
-                        />
-                    </div>
-                    <div className="book-title">{this.props.bookData.title}</div>
-                    <div className="book-authors">{this.props.bookData.authors}</div>
+    return (
+        <li>
+            <div className="book">
+                <div className="book-top">
+                    <div className="book-cover"
+                        style={{
+                            width: 128, height: 193,
+                            backgroundImage: `url(${props.bookData.imageLinks && (props.bookData.imageLinks.smallThumbnail || props.bookData.imageLinks.thumbnail)})`
+                        }}></div>
+                    <BookAction bookData={props.bookData}
+                        getShelf={getShelf}
+                    />
                 </div>
-            </li>
-        )
-    }
+                <div className="book-title">{props.bookData.title}</div>
+                <div className="book-authors">{props.bookData.authors}</div>
+            </div>
+        </li>
+    )
 }
 
 export default Book

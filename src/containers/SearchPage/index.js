@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Search from '../../Components/Search'
 
-class SearchPage extends Component {
+function SearchPage(props) {
 
-    getBook(book, shelfName) {
-        this.props.updateShelf(book, shelfName)
+    const getBook = function (book, shelfName) {
+        props.updateShelf(book, shelfName)
     }
-    render() {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    <Search booksData={this.props.books}
-                        getBook={this.getBook.bind(this)}
-                    />
-                </div>
-            </div >
-        )
-    }
+                <Search booksData={props.books}
+                    getBook={getBook}
+                />
+            </div>
+        </div >
+    )
 }
 
 export default SearchPage

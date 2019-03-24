@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from '../Book'
 import * as BooksAPI from '../../BooksAPI'
+import DebounceInput from 'react-debounce-input'
 
 class Search extends Component {
 
@@ -13,11 +14,11 @@ class Search extends Component {
 
   updateQuery = (query) => {
     this.setState({
-      query: query.trim(),
+      query: query,
       isLoading: true
     })
 
-    BooksAPI.search(query).then((response) => {
+    BooksAPI.search(query.trim()).then((response) => {
       var booksArr = Array.isArray(response) ? response : []
 
       for (let i = 0; i < booksArr.length; i++) {
@@ -47,9 +48,9 @@ class Search extends Component {
   }
 
   _renderItem() {
-    const { isLoading, books,query } = this.state;
+    const { isLoading, books, query } = this.state;
 
-    if (isLoading == false && books.length === 0 && query.length ===0) {
+    if (isLoading == false && books.length === 0 && query.length === 0) {
       return <li>{'Please Write Something'}</li>;
     }
 
@@ -74,7 +75,9 @@ class Search extends Component {
         <div className="search-books-bar">
           <Link to='/' className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text"
+            <DebounceInput
+              debounceTimeout={1000}
+              type="text"
               placeholder="Search by title or author"
               value={this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}

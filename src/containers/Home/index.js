@@ -18,8 +18,9 @@ class Home extends Component {
                     </div>
                     <div className="list-books-content">
                         <div>{
-                            this.props.shelfData.map((shelf) => {
+                            this.props.shelfData.map((shelf, index) => {
                                 return <Shelf
+                                    key={index}
                                     getBook={this.getBook.bind(this)}
                                     shelfData={shelf}
                                     books={this.props.books
