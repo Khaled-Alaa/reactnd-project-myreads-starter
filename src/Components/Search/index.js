@@ -50,7 +50,7 @@ class Search extends Component {
   _renderItem() {
     const { isLoading, books, query } = this.state;
 
-    if (isLoading == false && books.length === 0 && query.length === 0) {
+    if (isLoading === false && books.length === 0 && query.length === 0) {
       return <li>{'Please Write Something'}</li>;
     }
 
@@ -58,12 +58,12 @@ class Search extends Component {
       return <li>{'Loading...'}</li>
     }
 
-    if (isLoading == false && books.length === 0) {
+    if (isLoading === false && books.length === 0) {
       return <li>{'No Books Found'}</li>;
     }
 
     return books.map((book) => {
-      return <li><Book bookData={book}
+      return <li key={book.id}><Book bookData={book}
         getBooKAndShelf={this.getBooKAndShelf.bind(this)}
       /></li>
     })

@@ -9,7 +9,7 @@ function SearchPage(props) {
     return (
         <div>
             <div>
-                <Search booksData={props.books}
+                <Search key = {props.books.id} booksData={props.books}
                     getBook={getBook}
                 />
             </div>

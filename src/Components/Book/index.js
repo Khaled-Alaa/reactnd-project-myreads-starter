@@ -6,7 +6,6 @@ function Book(props) {
         props.getBooKAndShelf(props.bookData, shelfName)
     }
     return (
-        <li>
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover"
@@ -21,7 +20,6 @@ function Book(props) {
                 <div className="book-title">{props.bookData.title}</div>
                 <div className="book-authors">{props.bookData.authors}</div>
             </div>
-        </li>
     )
 }
 
